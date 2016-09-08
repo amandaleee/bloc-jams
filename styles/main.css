@@ -49,7 +49,7 @@ body {
 .links-container .navbar-link:hover {
   color: rgba(233,50,117,1);
 }
-.links-contianer .navbar-link:active {
+.links-container .navbar-link:active {
  	background-color: #fff;
  	color: rgba(233,50,117,1);
 }
