@@ -13,13 +13,42 @@ body {
 	min-height: 100%;
 }
 .navbar {
+	position: relative;
 	padding: .5rem;
-	background-color: rbga(101,18, 95, 1);
+	background-color: rgba(101,18, 95, .5);
+	z-index: 1;
 }
 .navbar .logo {
 	position: relative; 
 	left: 2rem;
+	cursor: pointer;
 }	
+.navbar .links-container {
+	display: table; 
+	position: absolute; 
+	top: 0;
+	right: 0;
+	height: 100px;
+	color: #fff;
+	text-decoration: none;
+}
+.links-container .navbar-link {
+	display: table-cell;
+	position: relative; 
+	height: 100%; 
+	padding: 0 1rem;
+	vertical-align: middle;
+	color: #fff;
+	font-size: .625rem;
+	letter-spacing: .05rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	text-decoration: none;
+	cursor: pointer;
+}
+.links-container .navbar-link:hover {
+     color: rgba(233,50,117,1);
+ }
 .container {
 	margin: 0 auto; 
 	max-width: 64rem;
