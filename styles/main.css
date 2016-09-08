@@ -53,6 +53,9 @@ body {
 	margin: 0 auto; 
 	max-width: 64rem;
 }
+.container.narrow {
+	max-width: 56rem;
+}
 
 @media all and (min-width: 640px) {
 	html {
