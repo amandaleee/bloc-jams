@@ -38,12 +38,12 @@ body.landing {
 	-webkit-transform: scaleX(0.1) translateY(0);
 	-moz-transform: scaleX(0.1) translateY(0);
 	transform: scaleX(0.1) translateY(0);
-	-webkit-transition: all 1.5s ease-in-out;
-	-moz-transition: all 1.5s ease-in-out;
-	transition: all 1.5s ease-in-out;
-	-webkit-transition-delay: 1s;
-	-moz-transition-delay: 1s;
-	transition-delay: 1s;
+	-webkit-transition: all 1.5s cubic-bezier(0.42, 0.0, 0.58, 1.0);
+	-moz-transition: all 1.5s cubic-bezier(0.42, 0.0, 0.58, 1.0);
+	transition: all 1.5s cubic-bezier(0.42, 0.0, 0.58, 1.0);
+	-webkit-transition-delay: .5s;
+	-moz-transition-delay: .5s;
+	transition-delay: .5s;
 }
 .point .point-title {
 	font-size: 1.25rem;
