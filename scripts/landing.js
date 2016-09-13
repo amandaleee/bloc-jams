@@ -1,4 +1,4 @@
-function animatePoints() {
+var animatePoints = function() {
   var points = document.getElementsByClassName('point');
   var revealPoint = function(index){
     points[index].style.opacity = 1;
