@@ -14,9 +14,9 @@ var collectionItemTemplate =
   +	'</div><!--/collection-album-container-->';
 
 window.onload = function(){
-	var collectonContainer = document.getElementsByClassName('album-covers')[0];
-	collectonContainer.innerHTML = '';
-	for (var i = 0; i < 12; i++) {
-		collectionContainer.innerHTML += collectionItemTemplate;
-	}
+  var collectonContainer = document.getElementsByClassName('album-covers')[0];
+  collectonContainer.innerHTML = '';
+  for (var i = 0; i < 12; i++) {
+  	collectionContainer.innerHTML += collectionItemTemplate;
+  }
 }
