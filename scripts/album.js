@@ -58,14 +58,14 @@ var createSongRow = function(songNumber, songName, songLength) {
   return template;
 };
 
-var setCurrentAlbum = function(album) {
-  // set the elements to display on the page
-  var albumTitle = document.getElementsByClassName('album-view-title')[0];
-  var albumArtist = document.getElementsByClassName('album-view-artist')[0];
-  var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
-  var albumImage = document.getElementsByClassName('album-cover-art')[0];
-  var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
+// set the elements to display on the page - moved outside of setCurrentAlbum to get them in the global scope
+var albumTitle = document.getElementsByClassName('album-view-title')[0];
+var albumArtist = document.getElementsByClassName('album-view-artist')[0];
+var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
+var albumImage = document.getElementsByClassName('album-cover-art')[0];
+var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
 
+var setCurrentAlbum = function(album) {
   // identify the child node of element, nodeValue sets their value
   albumTitle.firstChild.nodeValue = album.title;
   albumArtist.firstChild.nodeValue = album.artist;
@@ -83,4 +83,15 @@ var setCurrentAlbum = function(album) {
  
 window.onload = function() {
   setCurrentAlbum(albumPicasso);
+  var albumCover = document.getElementsByClassName("album-cover-art")[0];
+  var albums = [albumPicasso, albumMarconi, albumBonIver]; //this is not v dynamic
+  var index = 0;
+  albumCover.addEventListener("click", function(event) {
+    setCurrentAlbum(albums[index]);
+    index++;
+    if (index === albums.length) {
+      index = 0;
+    }
+  });
 };
+
