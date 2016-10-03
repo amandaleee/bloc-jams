@@ -12,7 +12,6 @@ var albumPicasso = {
     { title: 'Magenta', duration: '2:15'}
   ]
 };
-
 var albumMarconi = {
   title: 'The Telephone',
   artist: 'Guglielmo Marconi',
@@ -28,7 +27,6 @@ var albumMarconi = {
   ]
 };
 
-
 var createSongRow = function(songNumber, songName, songLength) {
   var template =
     '<tr class="album-view-song-item">'
@@ -38,4 +36,31 @@ var createSongRow = function(songNumber, songName, songLength) {
     + '</tr>';
 
   return template;
+};
+
+var setCurrentAlbum = function(album) {
+  // set the elements to display on the page
+  var albumTitle = document.getElementsByClassName('album-view-title')[0];
+  var albumArtist = document.getElementsByClassName('album-view-artist')[0];
+  var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
+  var albumImage = document.getElementsByClassName('album-cover-art')[0];
+  var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
+
+  // identify the child node of element, nodeValue sets their value
+  albumTitle.firstChild.nodeValue = album.title;
+  albumArtist.firstChild.nodeValue = album.artist;
+  albumReleaseInfo.firstChild.nodeValue = album.year + ' ' + album.label;
+  albumImage.setAttribute('src', album.albumArtUrl);
+
+  // //clear the song list of all previous songs from previously-listened albums
+  albumSongList.innerHTML = '';
+
+  // add a row for each song in the album - see createSongRow function above. 
+  for (var i = 0; i < album.songs.length; i++) {
+    albumSongList.innerHTML += createSongRow(i + 1, album.songs[i].title, album.songs[i].duration);
+  }
+};
+ 
+window.onload = function() {
+  setCurrentAlbum(albumPicasso);
 };
