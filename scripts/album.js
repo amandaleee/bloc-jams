@@ -26,6 +26,26 @@ var albumMarconi = {
     { title: 'Wrong phone number', duration: '2:15'}
   ]
 };
+var albumBonIver = {
+  title: '22, A Million',
+  artist: 'Bon Iver',
+  label: 'Jagjaguwar',
+  year: '2016',
+  albumArtUrl: 'assets/images/album_covers/20.png',
+  songs: [
+    { title: '22 (OVER S∞∞N)', duration: '1:01' },
+    { title: '10 d E A T h b R E a s T ⊠ ⊠', duration: '5:01' },
+    { title: '715 - CRΣΣKS', duration: '3:21'},
+    { title: '33 “GOD”', duration: '3:14' },
+    { title: '29 #Strafford APTS', duration: '2:15'},
+    { title: '666 ʇ', duration: '2:15'},
+    { title: '21 M♢♢N WATER', duration: '2:15'},
+    { title: '____45_____', duration: '2:15'}, 
+    { title: '00000 Million', duration: '2:15'}, 
+
+  ]
+};
+
 
 var createSongRow = function(songNumber, songName, songLength) {
   var template =
