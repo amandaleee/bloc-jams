@@ -100,6 +100,12 @@ window.onload = function() {
   }
 };
 var findParentByClassName = function(element, targetClass) {
+  if (element.parentElement === null) {
+    alert("no parent found");
+  }
+  if (element.ParentElement !== targetClass) {
+    alert("No parent found with that class name");
+  }
   if (element) {
     var currentParent = element.parentElement;
     while (currentParent.className != targetClass && currentParent.className !== null) {
@@ -108,6 +114,7 @@ var findParentByClassName = function(element, targetClass) {
     return currentParent;
   }
 };
+
 
 var getSongItem = function(element) {
   switch (element.className) {
