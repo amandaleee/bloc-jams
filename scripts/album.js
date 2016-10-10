@@ -76,12 +76,21 @@ window.onload = function() {
     if (event.target.parentElement.className === 'album-view-song-item') {
       // turn number into play btn
       event.target.parentElement.querySelector('.song-item-number').innerHTML = playButtonTemplate;
+      var songItem = getSongItem(event.target);
+      if (songItem.getAttribute('data-song-number') !== currentlyPlayingSong) {
+        songItem.innerHTML = playButtonTemplate;
+      }
     }
   });
   for (var i = 0; i < songRows.length; i++) {
     songRows[i].addEventListener('mouseleave', function(event) {
       //this is why we have the data attr - we can still access it, even tho the innerhtml of the song number previously displayed on the page has turned into a play btn
-      this.children[0].innerHTML = this.children[0].getAttribute('data-song-number');
+      // this.children[0].innerHTML = this.children[0].getAttribute('data-song-number');
+      var songItem = getSongItem(event.target);
+      var songItemNumber = songItem.getAttribute('data-song-number');
+      if (songItemNumber !== currentlyPlayingSong){
+        songItem.innerHTML = songItemNumber;
+      }
     });
     songRows[i].addEventListener('click', function(event) {
       // Event handler call goes here
