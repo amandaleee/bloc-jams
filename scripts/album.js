@@ -39,36 +39,38 @@ var createSongRow = function(songNumber, songName, songLength) {
 };
 
 var setCurrentAlbum = function(album) {
-  // set the elements to display on the page
-  var albumTitle = document.getElementsByClassName('album-view-title')[0];
-  var albumArtist = document.getElementsByClassName('album-view-artist')[0];
-  var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
-  var albumImage = document.getElementsByClassName('album-cover-art')[0];
-  var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
+//the objects on the page
+  var $albumTitle = $('.album-view-title');
+  var $albumArtist = $('.album-view-artist');
+  var $albumReleaseInfo = $('.album-view-release-info');
+  var $albumImage = $('.album-cover-art');
+  var $albumSongList = $('.album-view-song-list');
+
 
   // identify the child node of element, nodeValue sets their value
-  albumTitle.firstChild.nodeValue = album.title;
-  albumArtist.firstChild.nodeValue = album.artist;
-  albumReleaseInfo.firstChild.nodeValue = album.year + ' ' + album.label;
-  albumImage.setAttribute('src', album.albumArtUrl);
+  $albumTitle.text(album.title);
+  $albumArtist.text(album.artist);
+  $albumReleaseInfo.text(album.year + ' ' + album.label);
+  $albumImage.attr('src', album.albumArtUrl);
 
   // //clear the song list of all previous songs from previously-listened albums
-  albumSongList.innerHTML = '';
+  $albumSongList.empty();
 
   // add a row for each song in the album - see createSongRow function above. 
   for (var i = 0; i < album.songs.length; i++) {
-    albumSongList.innerHTML += createSongRow(i + 1, album.songs[i].title, album.songs[i].duration);
+    var $newRow = createSongRow(i + 1, album.songs[i].title, album.songs[i].duration);
+    $albumSongList.append($newRow);
   }
 };
 
-var songListContainer = document.getElementsByClassName('album-view-song-list')[0];
+var $songListContainer = $('.album-view-song-list');
 var playButtonTemplate = '<a class="album-song-button"><span class="ion-play"></span></a>';
 var pauseButtonTemplate = '<a class="album-song-button"><span class="ion-pause"></span></a>';
-var songRows = document.getElementsByClassName('album-view-song-item');
+var $songRows = $('.album-view-song-item');
 
 var currentlyPlayingSong = null;
 
-window.onload = function() {
+$(window).load(function(){
   setCurrentAlbum(albumPicasso);
   songListContainer.addEventListener('mouseover', function(event) {
     // #1
@@ -98,7 +100,8 @@ window.onload = function() {
       clickHandler(event.target);
     });
   }
-};
+});
+
 var findParentByClassName = function(element, targetClass) {
   if (element) {
     var currentParent = element.parentElement;
