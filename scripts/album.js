@@ -19,6 +19,7 @@ var createSongRow = function(songNumber, songName, songLength) {
 };
 
 var setCurrentAlbum = function(album) {
+  currentAlbum = album;
 //the objects on the page
   var $albumTitle = $('.album-view-title');
   var $albumArtist = $('.album-view-artist');
@@ -47,6 +48,7 @@ var playButtonTemplate = '<a class="album-song-button"><span class="ion-play"></
 var pauseButtonTemplate = '<a class="album-song-button"><span class="ion-pause"></span></a>';
 
 var currentlyPlayingSong = null;
+var currentAlbum = null;
 
 $(document).ready(function(){
   setCurrentAlbum(albumPicasso);
