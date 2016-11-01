@@ -79,8 +79,8 @@ var currentlyPlayingSong = null;
 
 $(document).ready(function(){
   setCurrentAlbum(albumPicasso);
-  songListContainer.addEventListener('mouseover', function(event) {
-
+  $songListContainer.on('mouseover', function(event) {
+    // #1
     console.log(event.target);
     if (event.target.parentElement.className === 'album-view-song-item') {
       // turn number into play btn
@@ -91,4 +91,21 @@ $(document).ready(function(){
       }
     }
   });
+
+  for (var i = 0; i < $songRows.length; i++) {
+    $songRows[i].on('mouseleave', function(event) {
+      //this is why we have the data attr - we can still access it, even tho the innerhtml of the song number previously displayed on the page has turned into a play btn
+      // this.children[0].innerHTML = this.children[0].getAttribute('data-song-number');
+      var songItem = getSongItem(event.target);
+      var songItemNumber = songItem.getAttribute('data-song-number');
+      if (songItemNumber !== currentlyPlayingSong){
+        songItem.innerHTML = songItemNumber;
+      }
+    });
+    songRows[i].addEventListener('click', function(event) {
+      // Event handler call goes here
+      console.log("clicked");
+      clickHandler(event.target);
+    });
+  }
 });
