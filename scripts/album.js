@@ -102,7 +102,7 @@ $(document).ready(function(){
         songItem.innerHTML = songItemNumber;
       }
     });
-    songRows[i].addEventListener('click', function(event) {
+    $songRows[i].on('click', function(event) {
       // Event handler call goes here
       console.log("clicked");
       clickHandler(event.target);
