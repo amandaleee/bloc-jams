@@ -1,31 +1,16 @@
-var albumPicasso = {
-  title: 'The Colors',
-  artist: 'Pablo Picasso',
-  label: 'Cubism',
-  year: '1881',
-  albumArtUrl: 'assets/images/album_covers/01.png',
-  songs: [
-    { title: 'Blue', duration: '4:26' },
-    { title: 'Green', duration: '3:14' },
-    { title: 'Red', duration: '5:01' },
-    { title: 'Pink', duration: '3:21'},
-    { title: 'Magenta', duration: '2:15'}
-  ]
-};
-var albumMarconi = {
-  title: 'The Telephone',
-  artist: 'Guglielmo Marconi',
-  label: 'EM',
-  year: '1909',
-  albumArtUrl: 'assets/images/album_covers/20.png',
-  songs: [
-    { title: 'Hello, Operator?', duration: '1:01' },
-    { title: 'Ring, ring, ring', duration: '5:01' },
-    { title: 'Fits in your pocket', duration: '3:21'},
-    { title: 'Can you hear me now?', duration: '3:14' },
-    { title: 'Wrong phone number', duration: '2:15'}
-  ]
-};
+// What we're doing here: 
+// - move album data into fixtures.js
+// - include that on album.innerHTML
+// - track the current song
+// - store album data
+// -  hover events
+// - use song data to update the currently playing bar
+// - toggle between play and pause in the playing bar
+// - track the index of the current song and use it to generate previousSong and nextSong
+// - add event handlers for previous and next
+// - use parseInt wherever you need to in order to make sure the song number is actually an integer. 
+
+
 
 var createSongRow = function(songNumber, songName, songLength) {
   var template =
