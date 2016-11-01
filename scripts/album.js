@@ -1,5 +1,5 @@
 // What we're doing here: 
-// - move album data into fixtures.js
+// - move album data into fixtures.js - DONE! 
 // - include that on album.innerHTML
 // - track the current song
 // - store album data
@@ -21,6 +21,28 @@ var createSongRow = function(songNumber, songName, songLength) {
     + '</tr>';
 
   var $row = $(template);
+  var clickHandler = function() {
+    var songNumber = parseInt($(this).attr('data-song-number'));
+    //if there is a song currently 
+    if (currentlyPlayingSongNumber !== null) {
+      var currentlyPlayingCell = $('.song-item-number[data-song-number="' + currentlyPlayingSongNumber + '"]');
+      currentlyPlayingCell.html(currentlyPlayingSongNumber);
+    }
+
+
+    if (currentlyPlayingSongNumber !== songNumber) {
+      $(this).html(pauseButtonTemplate);
+      currentlyPlayingSongNumber = songNumber;
+      currentSongFromAlbum = currentAlbum.songs[songNumber - 1];
+      updatePlayerBarSong();
+    } else if (currentlyPlayingSongNumber === songNumber) {
+      $(this).html(playButtonTemplate);
+      $('.main-controls .play-pause').html(playerBarPlayButton);
+      currentlyPlayingSongNumber = null;
+      currentSongFromAlbum = null;
+    }
+
+  };
   var onHover = function(event) {
     // Placeholder for function logic
   };
@@ -33,7 +55,8 @@ var createSongRow = function(songNumber, songName, songLength) {
 };
 
 var setCurrentAlbum = function(album) {
-//the objects on the page
+  currentAlbum = album;
+  //the objects on the page
   var $albumTitle = $('.album-view-title');
   var $albumArtist = $('.album-view-artist');
   var $albumReleaseInfo = $('.album-view-release-info');
@@ -61,6 +84,9 @@ var playButtonTemplate = '<a class="album-song-button"><span class="ion-play"></
 var pauseButtonTemplate = '<a class="album-song-button"><span class="ion-pause"></span></a>';
 
 var currentlyPlayingSong = null;
+var currentAlbum = null;
+var currentlyPlayingSongNumber = null;
+var currentSongFromAlbum = null;
 
 $(document).ready(function(){
   setCurrentAlbum(albumPicasso);
