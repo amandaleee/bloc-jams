@@ -1,3 +1,14 @@
+var setSong = function(songNumber){
+  //replaces where we set currentlyPlayingSongNumber and currentSongFromAlbum
+  currentlyPlayingSongNumber = parseInt(songNumber);
+  currentSongFromAlbum = currentAlbum.songs[songNumber-1];
+  //for this i originally just had
+}; 
+var getSongNumberCell = function(number) {
+  //replaces where we get .song-item-number as a selector - 198-99, 165-66, 63
+  // var currentlyPlayingCell = $('.song-item-number[data-song-number="' + currentlyPlayingSongNumber + '"]');
+};
+
 var createSongRow = function(songNumber, songName, songLength) {
   var template =
     '<tr class="album-view-song-item">'
