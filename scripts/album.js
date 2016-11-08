@@ -1,6 +1,13 @@
 var setSong = function(songNumber){
   currentlyPlayingSongNumber = parseInt(songNumber);
-  currentSongFromAlbum = currentAlbum.songs[songNumber-1]; //i tried to parseInt this but it's an object, not an int
+  currentSongFromAlbum = currentAlbum.songs[songNumber-1];
+  //new buzz sound object
+  currentSoundFile = new buzz.sound(currentSongFromAlbum.audioUrl, 
+    //new settingds object w 2 properties
+    { 
+      formats: [ 'mp3' ],
+      preload: true //load when the page loads. 
+    });
 }; 
 var getSongNumberCell = function(number) {
   var currentlyPlayingCell = $('.song-item-number[data-song-number="' + number + '"]');
@@ -122,6 +129,7 @@ var playerBarPauseButton = '<span class="ion-pause"></span>';
 var currentlyPlayingSong = null;
 var currentAlbum = null;
 var currentlyPlayingSongNumber = null;
+var currentSoundFile = null;
 var currentSongFromAlbum = null;
 var $previousButton = $('.main-controls .previous');
 var $nextButton = $('.main-controls .next');
