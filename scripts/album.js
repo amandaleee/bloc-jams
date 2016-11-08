@@ -1,20 +1,10 @@
 var setSong = function(songNumber){
-  //replaces where we set currentlyPlayingSongNumber and currentSongFromAlbum
   currentlyPlayingSongNumber = parseInt(songNumber);
   currentSongFromAlbum = currentAlbum.songs[songNumber-1]; //i tried to parseInt this but it's an object, not an int
 }; 
 var getSongNumberCell = function(number) {
-  //replaces where we get .song-item-number as a selector - 198-99, 165-66, 63
   var currentlyPlayingCell = $('.song-item-number[data-song-number="' + number + '"]');
   return currentlyPlayingCell;
-
-  ///////////////
-
-  // The assignment says: 
-  //Replace all instances where we use the selector with a getSongNumberCell() call.
-
-
-  ///////////////
 };
 
 var createSongRow = function(songNumber, songName, songLength) {
@@ -28,7 +18,6 @@ var createSongRow = function(songNumber, songName, songLength) {
   var $row = $(template);
 
   var onHover = function(event) {
-    // console.log("on hover");
     var songNumberCell = $(this).find('.song-item-number');
     var songNumber = parseInt(songNumberCell.attr('data-song-number'));
 
@@ -41,17 +30,15 @@ var createSongRow = function(songNumber, songName, songLength) {
       songNumberCell.innerHTML = playButtonTemplate;
       var songItem = this; //this row
       if (songItem.getAttribute('data-song-number') !== currentlyPlayingSongNumber) {
-        // songItem.innerHTML = playButtonTemplate; - doesn't work bc songItem is the row, not the cell
+
         $(this).find(songNumberCell).innerHTML = playButtonTemplate;
       }
     }
   };
 
   var offHover = function(event) {
-    // console.log("off hover");
     var songNumberCell = $(this).find('.song-item-number');
     var songNumber = parseInt(songNumberCell.attr('data-song-number'));
-    // setSong(songNumber);
 
     if (songNumber !== currentlyPlayingSongNumber) {
         songNumberCell.html(songNumber);
@@ -60,7 +47,6 @@ var createSongRow = function(songNumber, songName, songLength) {
       songNumberCell.innerHTML = songNumber;
       var songItem = this; //this row 
       if (songItem.getAttribute('data-song-number') !== currentlyPlayingSongNumber) {
-        // songItem.innerHTML = pauseButtonTemplate; - doesn't work bc songItem is the row, not the cell
         $(this).find(songNumberCell).innerHTML = playButtonTemplate;
       }
     }
@@ -71,7 +57,8 @@ var createSongRow = function(songNumber, songName, songLength) {
     var songNumberCell = $(this).find('.song-item-number');
     var songNumber = parseInt($(this).attr('data-song-number')); 
 
-    if (currentlyPlayingSongNumber !== null) { //if there's a song playing
+    if (currentlyPlayingSongNumber !== null) {
+     //if there's a song playing
       var currentlyPlayingCell = getSongNumberCell(currentlyPlayingSongNumber);
       currentlyPlayingCell.html(currentlyPlayingSongNumber);
     }
@@ -96,26 +83,19 @@ var createSongRow = function(songNumber, songName, songLength) {
 var $songRows = $('.album-view-song-item');
 
 var setCurrentAlbum = function(album) {
-  // console.log("current album is being set");
   currentAlbum = album; 
-  //the objects on the page
   var $albumTitle = $('.album-view-title');
   var $albumArtist = $('.album-view-artist');
   var $albumReleaseInfo = $('.album-view-release-info');
   var $albumImage = $('.album-cover-art');
   var $albumSongList = $('.album-view-song-list');
 
-  // identify the child node of element; the text() method sets their value 
   $albumTitle.text(album.title);
   $albumArtist.text(album.artist);
   $albumReleaseInfo.text(album.year + ' ' + album.label);
   $albumImage.attr('src', album.albumArtUrl);
 
-
-  // add a row for each song in the album - see createSongRow function above. 
   for (var i = 0; i < album.songs.length; i++) {
-
-
     var $newRow = createSongRow(i + 1, album.songs[i].title, album.songs[i].duration); 
     $albumSongList.append($newRow);
   }
@@ -147,7 +127,6 @@ var $previousButton = $('.main-controls .previous');
 var $nextButton = $('.main-controls .next');
 
 var nextSong = function() {  
-  //this is actually getting the previous song, not the last song of the album.
   var getLastSongNumber = function(index) {
     return (index == 0 ? currentAlbum.songs.length : index);
     //if index is 0, return the last song; 
