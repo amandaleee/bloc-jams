@@ -11,7 +11,7 @@ var createSongRow = function(songNumber, songName, songLength) {
   var onHover = function(event) {
     // console.log("on hover");
     var songNumberCell = $(this).find('.song-item-number');
-    var songNumber = songNumberCell.attr('data-song-number');
+    var songNumber = parseInt(songNumberCell.attr('data-song-number'));
 
     if (songNumber !== currentlyPlayingSongNumber) {
         songNumberCell.html(playButtonTemplate);
@@ -30,7 +30,7 @@ var createSongRow = function(songNumber, songName, songLength) {
   var offHover = function(event) {
     // console.log("off hover");
     var songNumberCell = $(this).find('.song-item-number');
-    var songNumber = songNumberCell.attr('data-song-number');
+    var songNumber = parseInt(songNumberCell.attr('data-song-number'));
 
     if (songNumber !== currentlyPlayingSongNumber) {
         songNumberCell.html(songNumber);
@@ -48,7 +48,7 @@ var createSongRow = function(songNumber, songName, songLength) {
   var clickHandler = function(event) {
 
     var songNumberCell = $(this).find('.song-item-number');
-    var songNumber = $(this).attr('data-song-number'); 
+    var songNumber = parseInt($(this).attr('data-song-number')); 
 
     if (currentlyPlayingSongNumber !== null) { //if there's a song playing
       var currentlyPlayingCell = $('.song-item-number[data-song-number="' + currentlyPlayingSongNumber + '"]');
@@ -93,10 +93,9 @@ var setCurrentAlbum = function(album) {
 
   // add a row for each song in the album - see createSongRow function above. 
   for (var i = 0; i < album.songs.length; i++) {
-    // console.log("new row is created") - works, commenting out for now
 
-    var $newRow = createSongRow(i + 1, album.songs[i].title, album.songs[i].duration);
-    // console.log($newRow); - works - works, commenting out for now. 
+
+    var $newRow = createSongRow(i + 1, album.songs[i].title, album.songs[i].duration); 
     $albumSongList.append($newRow);
   }
 };
@@ -110,7 +109,6 @@ var updatePlayerBarSong = function() {
   $('.currently-playing .artist-name').text(currentAlbum.artist);
   $('.currently-playing .artist-song-mobile').text(currentSongFromAlbum.title + " - " + currentAlbum.artist);
   $('.main-controls .play-pause').html(playerBarPauseButton);
-  // console.log("updated player bar song");
 };
 
 
