@@ -2,7 +2,7 @@ var setSong = function(songNumber){
   //replaces where we set currentlyPlayingSongNumber and currentSongFromAlbum
   currentlyPlayingSongNumber = parseInt(songNumber);
   currentSongFromAlbum = currentAlbum.songs[songNumber-1];
-  //for this i originally just had
+  console.log("song has been set");
 }; 
 var getSongNumberCell = function(number) {
   //replaces where we get .song-item-number as a selector - 198-99, 165-66, 63
@@ -22,7 +22,13 @@ var createSongRow = function(songNumber, songName, songLength) {
   var onHover = function(event) {
     // console.log("on hover");
     var songNumberCell = $(this).find('.song-item-number');
+<<<<<<< HEAD
     var songNumber = parseInt(songNumberCell.attr('data-song-number'));
+=======
+    var songNumber = songNumberCell.attr('data-song-number');
+    setSong(songNumber);
+
+>>>>>>> updates to album.js
 
     if (songNumber !== currentlyPlayingSongNumber) {
         songNumberCell.html(playButtonTemplate);
