@@ -3,9 +3,7 @@ var setSong = function(songNumber){
     this.stop();
   }
   currentlyPlayingSongNumber = parseInt(songNumber);
-  // currentSongFromAlbum = currentAlbum.songs[songNumber-1];
-  // console.log(currentAlbum.title + " is the current album");
-  // console.log(currentSongFromAlbum + " is the currentsongfromalbum");
+  currentSongFromAlbum = currentAlbum.songs[songNumber-1];
   //new buzz sound object
   //new settingds object w/2 properties
   currentSoundFile = new buzz.sound(currentSongFromAlbum.audioUrl, { 
@@ -96,12 +94,10 @@ var createSongRow = function(songNumber, songName, songLength) {
         $(this).html(pauseButtonTemplate);
         $('.main-controls .play-pause').html(playerBarPauseButton);
         currentSoundFile.play();
-        // console.log("this is supposed to play"); - works
       } else {
         $(this).html(playButtonTemplate);
         $('.main-controls .play-pause').html(playerBarPlayButton);
         currentSoundFile.pause();   
-        // console.log("this is supposed to pause"); - works
       }
     }
   };
@@ -114,7 +110,6 @@ var $songRows = $('.album-view-song-item');
 
 var setCurrentAlbum = function(album) {
   currentAlbum = album;
-  // console.log("current album is " + album); 
   var $albumTitle = $('.album-view-title');
   var $albumArtist = $('.album-view-artist');
   var $albumReleaseInfo = $('.album-view-release-info');
@@ -181,7 +176,6 @@ var nextSong = function() {
 
   // Update the Player Bar information
   updatePlayerBarSong();
-  console.log(currentlyPlayingSongNumber);
 
   var lastSongNumber = getLastSongNumber(currentSongIndex);
   //either returns index, or current album length.  
@@ -216,7 +210,6 @@ var previousSong = function() {
 
   // Update the Player Bar information
   updatePlayerBarSong();
-  console.log(currentlyPlayingSongNumber);
 
   var lastSongNumber = getLastSongNumber(currentSongIndex);
   var $previousSongNumberCell = getSongNumberCell(currentlyPlayingSongNumber);
@@ -232,5 +225,5 @@ $(document).ready(function(){
   $previousButton.click(previousSong);
   $nextButton.click(nextSong);
 
-  
+
 });
