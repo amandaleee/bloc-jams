@@ -88,7 +88,7 @@ var createSongRow = function(songNumber, songName, songLength) {
       currentlyPlayingSongNumber = songNumber;  //update currentlyplayingsongnumber
       currentSongFromAlbum = currentAlbum.songs[songNumber - 1];  //update the number
       updatePlayerBarSong(); //change the playerbar
-      //todo: when user clicks a song that's not the currently playing song, play currentSoundFile
+
       setSong(songNumber); //originally had setSong(currentSoundFile) but that doesn't make sense
       currentSoundFile.play();
     } else if (currentlyPlayingSongNumber === songNumber) {
@@ -96,10 +96,12 @@ var createSongRow = function(songNumber, songName, songLength) {
         $(this).html(pauseButtonTemplate);
         $('.main-controls .play-pause').html(playerBarPauseButton);
         currentSoundFile.play();
+        // console.log("this is supposed to play"); - works
       } else {
         $(this).html(playButtonTemplate);
         $('.main-controls .play-pause').html(playerBarPlayButton);
         currentSoundFile.pause();   
+        // console.log("this is supposed to pause"); - works
       }
     }
   };
@@ -174,11 +176,12 @@ var nextSong = function() {
   }
   // Set a new current song number
   currentlyPlayingSongNumber = currentSongIndex + 1;
-  currentSoundFile.play();
+  // currentSoundFile.play();
   currentSongFromAlbum = currentAlbum.songs[currentSongIndex];
 
   // Update the Player Bar information
   updatePlayerBarSong();
+  console.log(currentlyPlayingSongNumber);
 
   var lastSongNumber = getLastSongNumber(currentSongIndex);
   //either returns index, or current album length.  
@@ -209,10 +212,11 @@ var previousSong = function() {
 
   // Set a new current song
   setSong(currentSongIndex + 1);
-  currentSoundFile.play();
+  // currentSoundFile.play();
 
   // Update the Player Bar information
   updatePlayerBarSong();
+  console.log(currentlyPlayingSongNumber);
 
   var lastSongNumber = getLastSongNumber(currentSongIndex);
   var $previousSongNumberCell = getSongNumberCell(currentlyPlayingSongNumber);
@@ -227,4 +231,6 @@ $(document).ready(function(){
   setCurrentAlbum(albumPicasso);
   $previousButton.click(previousSong);
   $nextButton.click(nextSong);
+
+  
 });
