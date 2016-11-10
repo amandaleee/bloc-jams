@@ -220,8 +220,20 @@ var previousSong = function() {
     
 };
 
+var $mainControls = $(".main-controls .play-pause");
+
+
+var toggleFromPlayerBar = function(){
+  console.log("toggling from player bar");
+};
+
+
 $(document).ready(function(){
   setCurrentAlbum(albumPicasso);
+
+  $mainControls.click(toggleFromPlayerBar);
+
+
   $previousButton.click(previousSong);
   $nextButton.click(nextSong);
 
