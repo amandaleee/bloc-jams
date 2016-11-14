@@ -245,30 +245,34 @@ var toggleFromPlayerBar = function(){
 
 
   if (currentlyPlayingSongNumber !== null) {
+    //if there's a song playing
     console.log(currentlyPlayingSongNumber + " is the currently playing song number");
-     //if there's a song playing
-      var currentlyPlayingCell = getSongNumberCell(currentlyPlayingSongNumber);
-      currentlyPlayingCell.html(currentlyPlayingSongNumber);
-    }
-    if (currentlyPlayingSongNumber !== songNumber) { //if the currentlyplaying song is not the song that was clicked on.
-      $(this).html(pauseButtonTemplate); //change it to pause
-      currentlyPlayingSongNumber = songNumber;  //update currentlyplayingsongnumber
-      currentSongFromAlbum = currentAlbum.songs[songNumber - 1];  //update the number
-      updatePlayerBarSong(); //change the playerbar
+     
+    var currentlyPlayingCell = getSongNumberCell(currentlyPlayingSongNumber);
+    currentlyPlayingCell.html(currentlyPlayingSongNumber);
+  } else {
+    console.log("no song currently playing");
+  }
 
-      setSong(songNumber); //originally had setSong(currentSoundFile) but that doesn't make sense
-      currentSoundFile.play();
-    } else if (currentlyPlayingSongNumber === songNumber) {
-      if (currentSoundFile.isPaused()) {
-        $(this).html(pauseButtonTemplate);
-        $('.main-controls .play-pause').html(playerBarPauseButton);
-        currentSoundFile.play();
-      } else {
-        $(this).html(playButtonTemplate);
-        $('.main-controls .play-pause').html(playerBarPlayButton);
-        currentSoundFile.pause();   
-      }
-    }
+    // if (currentlyPlayingSongNumber !== songNumber) { //if the currentlyplaying song is not the song that was clicked on.
+    //   $(this).html(pauseButtonTemplate); //change it to pause
+    //   currentlyPlayingSongNumber = songNumber;  //update currentlyplayingsongnumber
+    //   currentSongFromAlbum = currentAlbum.songs[songNumber - 1];  //update the number
+    //   updatePlayerBarSong(); //change the playerbar
+
+    //   setSong(songNumber); //originally had setSong(currentSoundFile) but that doesn't make sense
+    //   currentSoundFile.play();
+    // } else if (currentlyPlayingSongNumber === songNumber) {
+    //   if (currentSoundFile.isPaused()) {
+    //     $(this).html(pauseButtonTemplate);
+    //     $('.main-controls .play-pause').html(playerBarPauseButton);
+    //     currentSoundFile.play();
+    //   } else {
+    //     $(this).html(playButtonTemplate);
+    //     $('.main-controls .play-pause').html(playerBarPlayButton);
+    //     currentSoundFile.pause();   
+    //   }
+    // }
 
 };
 
