@@ -14,6 +14,13 @@ var setSong = function(songNumber){
   setVolume(currentVolume);
 }; 
 
+
+var seek = function(time) {
+  if (currentSoundFile) {
+  currentSoundFile.setTime(time);
+  }
+};
+
 var setVolume = function(volume) {
   if (currentSoundFile) {
   currentSoundFile.setVolume(volume);
@@ -127,6 +134,64 @@ var setCurrentAlbum = function(album) {
   }
 };
 
+var updateSeekBarWhileSongPlays = function() {
+  if (currentSoundFile) {
+      // timeupdate = custom Buzz event
+    currentSoundFile.bind('timeupdate', function(event) {
+      // recalculate seekBarFillRatio
+      var seekBarFillRatio = this.getTime() / this.getDuration();
+      var $seekBar = $('.seek-control .seek-bar');
+
+      updateSeekPercentage($seekBar, seekBarFillRatio);
+    });
+  }
+};
+
+var updateSeekPercentage = function($seekBar, seekBarFillRatio) {
+  var offsetXPercent = seekBarFillRatio * 100;
+  // min and max for ranges
+  offsetXPercent = Math.max(0, offsetXPercent);
+  offsetXPercent = Math.min(100, offsetXPercent);
+
+  // convert to string so it's useful in css, then put it in css
+  var percentageString = offsetXPercent + '%';
+  $seekBar.find('.fill').width(percentageString);
+  $seekBar.find('.thumb').css({left: percentageString});
+};
+
+var setupSeekBars = function() {
+  console.log("setupSeekBars is working");
+
+  var $seekBars = $('.player-bar .seek-bar');
+
+  $seekBars.click(function(event) {
+    // pageX = jQuery event value for the X coordinate at which the event occurred
+    var offsetX = event.pageX - $(this).offset().left;
+    var barWidth = $(this).width();
+    // offsetX/width to get the seekBarFillRatio
+    var seekBarFillRatio = offsetX / barWidth;
+    updateSeekPercentage($(this), seekBarFillRatio);
+  });
+  $seekBars.find('.thumb').mousedown(function(event) {
+    var $seekBar = $(this).parent();
+
+    // see also .addEventListener('click', function...
+    $(document).bind('mousemove.thumb', function(event){
+    var offsetX = event.pageX - $seekBar.offset().left;
+    var barWidth = $seekBar.width();
+    var seekBarFillRatio = offsetX / barWidth;
+
+    updateSeekPercentage($seekBar, seekBarFillRatio);
+    });
+
+    // unbind
+    $(document).bind('mouseup.thumb', function() {
+    $(document).unbind('mousemove.thumb');
+    $(document).unbind('mouseup.thumb');
+    });
+  });
+};
+
 var trackIndex = function(album, song) {
   return album.songs.indexOf(song);
 };
@@ -222,6 +287,7 @@ var previousSong = function() {
 
 $(document).ready(function(){
   setCurrentAlbum(albumPicasso);
+  setupSeekBars();
   $previousButton.click(previousSong);
   $nextButton.click(nextSong);
 
