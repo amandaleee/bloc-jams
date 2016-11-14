@@ -150,7 +150,7 @@ var currentAlbum = null;
 var currentlyPlayingSongNumber = null;
 var currentSoundFile = null;
 var currentSongFromAlbum = null;
-var currentVolume = 80;
+var currentVolume = 10;
 
 var $previousButton = $('.main-controls .previous');
 var $nextButton = $('.main-controls .next');
@@ -224,11 +224,13 @@ var $mainControls = $(".main-controls .play-pause");
 
 
 var toggleFromPlayerBar = function(){
-  // console.log("toggling from player bar"); - works
   // console.log(currentlyPlayingSong); - returns null [??]
+  // console.log(currentlyPlayingSoundFile);// - doesn't work - not defined 
+  // console.log(songNumber); - doesn't return anything
   console.log(currentlyPlayingSongNumber); //- works
-  // console.log(currentSoundFile.isPaused);
-  console.log(currentlyPlayingSound)
+  
+  
+  // console.log(currentSoundFile); //- this returns the object
   // console.log(currentlyPlayingSong.isPaused());
   // if (currentSoundFile.isPaused()) {
   //   $mainControls.html(pauseButtonTemplate);
@@ -239,6 +241,34 @@ var toggleFromPlayerBar = function(){
   //   $mainControls.html(playerBarPlayButton);
   //   currentSoundFile.pause();   
   // }
+
+
+
+  if (currentlyPlayingSongNumber !== null) {
+    console.log(currentlyPlayingSongNumber + " is the currently playing song number");
+     //if there's a song playing
+      var currentlyPlayingCell = getSongNumberCell(currentlyPlayingSongNumber);
+      currentlyPlayingCell.html(currentlyPlayingSongNumber);
+    }
+    if (currentlyPlayingSongNumber !== songNumber) { //if the currentlyplaying song is not the song that was clicked on.
+      $(this).html(pauseButtonTemplate); //change it to pause
+      currentlyPlayingSongNumber = songNumber;  //update currentlyplayingsongnumber
+      currentSongFromAlbum = currentAlbum.songs[songNumber - 1];  //update the number
+      updatePlayerBarSong(); //change the playerbar
+
+      setSong(songNumber); //originally had setSong(currentSoundFile) but that doesn't make sense
+      currentSoundFile.play();
+    } else if (currentlyPlayingSongNumber === songNumber) {
+      if (currentSoundFile.isPaused()) {
+        $(this).html(pauseButtonTemplate);
+        $('.main-controls .play-pause').html(playerBarPauseButton);
+        currentSoundFile.play();
+      } else {
+        $(this).html(playButtonTemplate);
+        $('.main-controls .play-pause').html(playerBarPlayButton);
+        currentSoundFile.pause();   
+      }
+    }
 
 };
 
