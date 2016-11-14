@@ -224,7 +224,22 @@ var $mainControls = $(".main-controls .play-pause");
 
 
 var toggleFromPlayerBar = function(){
-  console.log("toggling from player bar");
+  // console.log("toggling from player bar"); - works
+  // console.log(currentlyPlayingSong); - returns null [??]
+  console.log(currentlyPlayingSongNumber); //- works
+  // console.log(currentSoundFile.isPaused);
+  console.log(currentlyPlayingSound)
+  // console.log(currentlyPlayingSong.isPaused());
+  // if (currentSoundFile.isPaused()) {
+  //   $mainControls.html(pauseButtonTemplate);
+  //   $mainControls.html(playerBarPauseButton);
+  //   currentSoundFile.play();
+  // } else {
+  //   $mainControls.html(playButtonTemplate);
+  //   $mainControls.html(playerBarPlayButton);
+  //   currentSoundFile.pause();   
+  // }
+
 };
 
 
