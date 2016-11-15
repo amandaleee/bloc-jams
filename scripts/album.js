@@ -222,23 +222,25 @@ var previousSong = function() {
 
 var $mainControls = $(".main-controls .play-pause");
 
-
 var toggleFromPlayerBar = function(){
   //if there's not a song playing
   if (currentSoundFile == null) {
     setSong(1);//play the first song
     currentSoundFile.play();
     $('.main-controls .play-pause').html(playerBarPauseButton);
-    console.log(currentlyPlayingSongNumber);
+    currentlyPlayingCell = getSongNumberCell(1);
+    currentlyPlayingCell.html(pauseButtonTemplate);
   } else {
     //if there is a current soundfile and it's paused
     if (currentSoundFile.isPaused()) {
         currentSoundFile.play();
         $('.main-controls .play-pause').html(playerBarPauseButton);
+        currentlyPlayingCell.html(pauseButtonTemplate);
     } else {
       //if there is a current soundfile and it's playing
       currentSoundFile.pause();
       $('.main-controls .play-pause').html(playerBarPlayButton);
+      currentlyPlayingCell.html(playButtonTemplate);
     }
   } 
 };
