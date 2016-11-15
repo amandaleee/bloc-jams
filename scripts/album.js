@@ -336,9 +336,9 @@ var setupSeekBars = function() {
       } else {
         setVolume(seekBarFillRatio);
       }
-    updateSeekPercentage($seekBar, seekBarFillRatio);
+      updateSeekPercentage($seekBar, seekBarFillRatio);
+    });
   });
-});
 }
 
 
