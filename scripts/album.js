@@ -3,10 +3,9 @@ var setSong = function(songNumber){
     this.stop();
   }
   currentlyPlayingSongNumber = parseInt(songNumber);
-  debugger;
   currentSongFromAlbum = currentAlbum.songs[songNumber-1];
   //new buzz sound object
-  //new settingds object w/2 properties
+  //new settingds object w/2 properties   
   currentSoundFile = new buzz.sound(currentSongFromAlbum.audioUrl, { 
     formats: [ 'mp3' ],
     preload: true //load when the page loads. 
@@ -227,18 +226,19 @@ var $mainControls = $(".main-controls .play-pause");
 var toggleFromPlayerBar = function(){
   //if there's not a song playing
   if (currentSoundFile == null) {
-    //buttons toggling
-    console.log("this should play");
-
-    setSong(1);
+    setSong(1);//play the first song
     currentSoundFile.play();
+    $('.main-controls .play-pause').html(playerBarPauseButton);
+    console.log(currentlyPlayingSongNumber);
   } else {
     //if there is a current soundfile and it's paused
     if (currentSoundFile.isPaused()) {
         currentSoundFile.play();
+        $('.main-controls .play-pause').html(playerBarPauseButton);
     } else {
       //if there is a current soundfile and it's playing
       currentSoundFile.pause();
+      $('.main-controls .play-pause').html(playerBarPlayButton);
     }
   } 
 };
@@ -246,10 +246,7 @@ var toggleFromPlayerBar = function(){
 
 $(document).ready(function(){
   setCurrentAlbum(albumPicasso);
-
   $mainControls.click(toggleFromPlayerBar);
-
-
   $previousButton.click(previousSong);
   $nextButton.click(nextSong);
 
