@@ -270,7 +270,7 @@ var updateSeekBarWhileSongPlays = function() {
       updateSeekPercentage($seekBar, seekBarFillRatio);
     });
   }
-  setCurrentTimeInPlayerBar();
+  setCurrentTimeInPlayerBar(seekBarFillRatio);
 };
 
 var updateSeekPercentage = function($seekBar, seekBarFillRatio) {
@@ -345,21 +345,25 @@ var setupSeekBars = function() {
     });
   });
 }
+
 //TODO
 var setCurrentTimeInPlayerBar = function(currentTime){
   var currentTime = $(".current-time");
-  // console.log(currentSoundFile.getTime());
-  currentTime.html(currentSoundFile.getTime()); //doesn't work yet
+  currentTime.html(currentSoundFile.getTime()); //this is a Buzz method
 }; 
 
 var setTotalTimeInPlayerBar = function(totalTime) {
   var totalTime = $(".total-time");
-  totalTime.html(currentSoundFile.getDuration());
-  // // console.log(currentSoundFile.getTime());
-  // songNumberCell.html(playButtonTemplate);
-  // currentTime.html(currentSoundFile.getTime());
+  totalTime.html(currentSoundFile.getDuration()); //another buzz method. 
 };
 
+var filterTimeCode = function(timeInSeconds) {
+  var numSeconds = Math.floor(parseFloat(timeInSeconds)); //round down the duration
+  var seconds = numSeconds % 60; //returns leftover seconds
+  var minutes = (numSeconds - seconds)/60; 
+  var time = minutes + ":" + seconds; 
+  // time.html(currentSoundFile.get)
+}; 
 
 
 
