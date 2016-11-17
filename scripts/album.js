@@ -33,6 +33,7 @@ var getSongNumberCell = function(number) {
 };
 
 var createSongRow = function(songNumber, songName, songLength) {
+  songLength = filterTimeCode(songLength);
   var template =
     '<tr class="album-view-song-item">'
     + '  <td class="song-item-number" data-song-number="' + songNumber + '">' + songNumber + '</td>'
@@ -346,23 +347,30 @@ var setupSeekBars = function() {
   });
 }
 
-//TODO
+//assignment21 methods
 var setCurrentTimeInPlayerBar = function(currentTime){
+  currentTime = filterTimeCode(currentTime);
   var currentTime = $(".current-time");
   currentTime.html(currentSoundFile.getTime()); //this is a Buzz method
 }; 
 
 var setTotalTimeInPlayerBar = function(totalTime) {
+  totalTime = filterTimeCode(totalTime);
   var totalTime = $(".total-time");
   totalTime.html(currentSoundFile.getDuration()); //another buzz method. 
 };
 
 var filterTimeCode = function(timeInSeconds) {
-  var numSeconds = Math.floor(parseFloat(timeInSeconds)); //round down the duration
+  var numSeconds = Math.floor(parseFloat(timeInSeconds)); //round down the duration, convert it to a float
   var seconds = numSeconds % 60; //returns leftover seconds
-  var minutes = (numSeconds - seconds)/60; 
-  var time = minutes + ":" + seconds; 
-  // time.html(currentSoundFile.get)
+  var minutes = (numSeconds - seconds)/60; //returns minutes
+  if (seconds === 0) { //if we don't set :00, it'll just show :0 for full-minute songs, and that looks odd
+    time = minutes + ":00"; 
+  } else {
+    time = minutes + ":" + seconds; 
+  }
+  console.log(time);
+  return time;
 }; 
 
 
@@ -373,6 +381,4 @@ $(document).ready(function(){
   $mainControls.click(toggleFromPlayerBar);
   $previousButton.click(previousSong);
   $nextButton.click(nextSong);
-
-
 });
